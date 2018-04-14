@@ -1,0 +1,17 @@
+{
+  "name": "api-ametrajup",
+  "version": "1.0.0",
+  "description": "api rest del protal ametrajup",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Miguel Angel Martinez Pineda; Marcos Abraham De Marcos Sanchez",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "mongoose": "^5.0.14"
+  }
+}
