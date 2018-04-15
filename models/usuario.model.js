@@ -14,10 +14,11 @@ var usrSchema = Schema ({
     tel: Number,
     empresa: String,
     sector: String,
-    isAdmin: Boolean
+    isAdmin: Boolean,
+    foto: String
 });
 
 usrSchema.plugin(uniqueValidator,{message:"Error, expected {PATH} to be unique."})
 
 
-module.exports = mongoose.model('Usuario'.usrSchema);
+module.exports = mongoose.model('Usuario',usrSchema);
