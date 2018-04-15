@@ -8,7 +8,7 @@ var cors = require('cors')
 
 // rutas de la api
 var eventoRouter = require("./routes/evento.route")
-
+var usuarioRouter = require("./routes/usuario.route")
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
@@ -24,5 +24,6 @@ app.use((req,res,next)=>{
 //middleware de autenticacion
 //app.use(middlewareAuth.initialize());
 app.use("/eventos",eventoRouter)
+app.use("/usuarios",usuarioRouter)
 
 module.exports = app;

@@ -1,21 +1,22 @@
 'use strict'
 
 var mongoose = require('mongoose');
-var Schema = mongoose.Shema;
+var Schema = mongoose.Schema;
 var uniqueValidator = require('mongoose-unique-validator');
 
 var usrSchema = Schema ({
     nombre: String,
-    apM: String,
-    apP: String,
-    correo: String,
+    apellidoPaterno: String,
+    apellidoMaterno: String,
+    correo: {type:String,unique:true},
     genero: String,
     ocupacion: String,
-    tel: Number,
+    telefono: String,
+    contrasenia: String,
     empresa: String,
     sector: String,
-    isAdmin: Boolean,
-    foto: String
+    isAdmin: {type:Boolean,default:false},
+    fotoPerfil: String
 });
 
 usrSchema.plugin(uniqueValidator,{message:"Error, expected {PATH} to be unique."})
