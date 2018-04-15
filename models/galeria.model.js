@@ -11,4 +11,4 @@ var GaleriaSchema = mongoose.Schema({
 
 GaleriaSchema.plugin(uniqueValidator,{message:"Error, expected {PATH} to be unique."})
 
-module.exports = mongoose.model("Galeria".GaleriaSchema)
+module.exports = mongoose.model("Galeria",GaleriaSchema)
