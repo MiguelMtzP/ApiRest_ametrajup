@@ -7,7 +7,7 @@ var cors = require('cors')
 //var middlewareAuth = require('./middleware/authentication');
 
 // rutas de la api
-
+var eventoRouter = require("./routes/evento.route")
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -23,6 +23,6 @@ app.use((req,res,next)=>{
 });
 //middleware de autenticacion
 //app.use(middlewareAuth.initialize());
-
+app.use("/eventos",eventoRouter)
 
 module.exports = app;
