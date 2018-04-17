@@ -6,7 +6,8 @@ var comentarioSchema= mongoose.Schema({
     idComentarioPadre: {type:mongoose.Schema.ObjectId,ref:"Comentario"},
     fecha:Date,
     idForo: {type:mongoose.Schema.ObjectId,ref:"Foro"},
-    mensaje:String
+    mensaje:String,
+    idUsuario:{type: mongoose.Schema.ObjectId,ref:"Usuario"} 
 })
 
 comentarioSchema.plugin(uniqueValidator,{message:"Error, expected {PATH} to be unique."})
