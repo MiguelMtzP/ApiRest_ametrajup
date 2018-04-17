@@ -6,7 +6,7 @@ var ExtractJwt = passportJWT.ExtractJwt;
 
 var jwtOptions = {}
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');
-jwtOptions.secretOrKey = '';
+jwtOptions.secretOrKey = 'privateKeyAmetrajup';
 var urlServer = "http://localhost:3000"
 module.exports= {
     jwtOptions,

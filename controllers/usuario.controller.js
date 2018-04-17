@@ -33,7 +33,7 @@ function registro(req,res) {
             } else {
                 var payload = {"id":user._id};
                 var token = jwt.sign(payload, config.jwtOptions.secretOrKey);
-                res.status(200).send({"usuarioRegistrado":result,token:token})
+                res.status(200).send({"usuarioRegistrado":result,"token":token})
                 
             }
         })
@@ -51,7 +51,7 @@ function getFotoPerfil(req,res){
 function login(req,res) {
     let params=req.body
 
-    Usuario.findOne({correo:params.correo,contrasenia:params.contrasenia})
+    Usuario.findOne({"correo":params.correo,"contrasenia":params.contrasenia})
     .exec((err,usr)=>{
         if (err) {
             res.status(500).send({"err":err.message})
