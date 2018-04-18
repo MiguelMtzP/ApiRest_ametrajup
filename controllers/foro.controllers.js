@@ -15,7 +15,7 @@ function getForos(peticion,respuesta) {
     })
 }
 
-//pendiente 
+ 
 function crearForo(req,res) {
     let params = req.body
     let newForo = new Foro()
@@ -92,7 +92,7 @@ function getForoById(req,res) {
     })
 }
 
-//pendiente
+
 function getMisForos(req, res){
     Foro.find({idUsuario:req.user._id}).sort({fecha:1})
     .exec((err,result)=>{

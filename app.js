@@ -13,6 +13,8 @@ var galeriaRouter = require("./routes/galeria.route")
 var visitaRouter = require("./routes/visita.router")
 var foroRouter = require("./routes/foro.route")
 var albumRouter = require("./routes/album.route")
+var comentarioRouter = require("./routes/comentario.route")
+
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
