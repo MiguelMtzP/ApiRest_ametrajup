@@ -3,7 +3,8 @@ const Comentario = require("../models/comentario.model")
 const Foro = require("../models/foro.model")
 
 function getComentarios(peticion,respuesta) {
-    Comentario.find().sort({fecha:1})
+    let idForo= req.params.idForo
+    Comentario.find({idForo:idForo}).sort({fecha:1})
     .exec((err,resultado)=>{
         if (err) {
             respuesta.status(500).send({"err":err})
@@ -17,17 +18,28 @@ function crearComentario(req,res) {
     let params = req.body
     let newComentario = new Comentario()
     newComentario.mensaje = params.mensaje
-    newComentario.fecha = params.fecha
     newComentario.idForo = req.user._id
+    if(params.idComentarioPadre){
+        newComentario = params.idComentarioPadre
+    }
+    newComentario.idUsuario = req.user._id
+    newComentario.save((err,result)=>{
+        if (err) {
+            respuesta.status(500).send({"err":err})
+        } else {
+            respuesta.status(200).send({comentarioCreado:result})            
+        }
+    })
 }
 
 function actualizaComentario(req,res) {
     let idComentario = req.params.idComentario
     let params = req.body
     let comentario = {}
-    if (params.titulo){
+    if (params.mensaje){
         comentario.mensaje = params.mensaje
     }
+    comentario.fecha = new Date()
     Comentario.findByIdAndUpdate(idComentario,{$set:comentario},{new:true})
     .exec((err,result)=>{
         if (err) {
@@ -54,7 +66,7 @@ function EliminarComentario(req,res) {
 
 function getRespuestasById(req,res) {
     let idComentario = req.params.idComentario
-    Comentario.find({idComentarioPadre:idComentario})
+    Comentario.find({idComentarioPadre:idComentario}).sort({fecha:1})
     .exec((err,resultado)=>{
         if (err) {
             res.status(500).send({err:err.message})

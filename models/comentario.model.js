@@ -4,7 +4,7 @@ var uniqueValidator = require('mongoose-unique-validator');
 
 var comentarioSchema= mongoose.Schema({
     idComentarioPadre: {type:mongoose.Schema.ObjectId,ref:"Comentario"},
-    fecha:Date,
+    fecha:{type:Date,default:Date.now},
     idForo: {type:mongoose.Schema.ObjectId,ref:"Foro"},
     mensaje:String,
     idUsuario:{type: mongoose.Schema.ObjectId,ref:"Usuario"} 
