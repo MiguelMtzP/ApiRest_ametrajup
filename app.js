@@ -10,7 +10,7 @@ var cors = require('cors')
 var eventoRouter = require("./routes/evento.route")
 var usuarioRouter = require("./routes/usuario.route")
 var galeriaRouter = require("./routes/galeria.route")
-
+var comentarioRouter = require("./routes/comentario.route")
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
