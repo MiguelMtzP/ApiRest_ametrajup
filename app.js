@@ -4,13 +4,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 var app = express();
 var cors = require('cors')
-//var middlewareAuth = require('./middleware/authentication');
+var middlewareAuth = require('./middlewares/authentication');
 
 // rutas de la api
 var eventoRouter = require("./routes/evento.route")
 var usuarioRouter = require("./routes/usuario.route")
 var galeriaRouter = require("./routes/galeria.route")
-
+var visitaRouter = require("./routes/visita.router")
+var foroRouter = require("./routes/foro.route")
+var albumRouter = require("./routes/album.route")
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -25,9 +27,12 @@ app.use((req,res,next)=>{
   next();
 });
 //middleware de autenticacion
-//app.use(middlewareAuth.initialize());
+app.use(middlewareAuth.initialize());
 app.use("/eventos",eventoRouter)
 app.use("/usuarios",usuarioRouter)
 app.use("/galerias",galeriaRouter)
+app.use("/foros",foroRouter)
+app.use("/albums",albumRouter)
+app.use("/visitas",visitaRouter)
 
 module.exports = app;

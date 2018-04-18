@@ -19,6 +19,20 @@ var cargaFotoPerfil = multer({
     })
 })
 
+var ActualizaFotoPerfil = multer({
+    storage:multer.diskStorage({
+        destination:(peticion,archivo,callback)=>{
+            
+            callback(null,rutaMultimedia+"usuarios/")
+        },
+        filename:(peticion,archivo,callback)=>{
+            let user = peticion.user            
+            var extensionArchivo = path.extname(archivo.originalname)
+            callback(null,user._id + extensionArchivo) 
+        }
+    })
+})
+
 var cargaFotosGaleria = multer({
     fileFilter:(req,file,cb)=>{
         if (!req.body.fotosArray){
@@ -55,5 +69,6 @@ var cargaFotosGaleria = multer({
 
 module.exports = {
     cargaFotoPerfil,
-    cargaFotosGaleria
+    cargaFotosGaleria,
+    ActualizaFotoPerfil
 }
