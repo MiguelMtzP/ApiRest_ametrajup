@@ -5,6 +5,10 @@ var uniqueValidator = require('mongoose-unique-validator');
 var ForoSchema = mongoose.Schema({
     titulo:String,
     descripcion:String,
+    fecha:{
+        type:Date,
+        default:Date.now
+    },
     idGaleria:{type:mongoose.Schema.ObjectId,ref:"Galeria"},
     idUsuario:{type: mongoose.Schema.ObjectId,ref:"Usuario"} 
 })

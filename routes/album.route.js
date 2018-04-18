@@ -3,7 +3,7 @@
 const express = require('express');
 var api= express.Router();
 const middlewareAuth = require ("../middlewares/authentication")
-const AlbumController = require("../controllers/album.controller")
+const AlbumController = require("../controllers/album.controllers")
 
 api.get("/",AlbumController.getAlbum)
 api.get("/:idAlbum",AlbumController.getAlbumById)

@@ -22,6 +22,22 @@ function crearForo(req,res) {
     newForo.titulo = params.titulo
     newForo.descripcion = params.descripcion
     newForo.fecha = params.fecha
+    newForo.idUsuario = req.user._id
+    let galeria = new Galeria
+    galeria.save((err,saved)=>{
+        if (err) {
+            res.status(500).send({err:err.message})
+        } else {
+            newForo.idGaleria = saved._id
+            newForo.save((err,savedForo)=>{
+                if (err) {
+                    res.status(500).send({err:err.message})
+                } else {
+                    res.status(200).send({foro:savedForo})            
+                }
+            })
+        }
+    })
 }
 
 function actualizaForo(req,res) {
@@ -40,7 +56,7 @@ function actualizaForo(req,res) {
         foro.fecha = params.fecha
     }
 
-    Foro.findByIdAndUpdate(idForo,{$set:evento},{new:true})
+    Foro.findByIdAndUpdate(idForo,{$set:foro},{new:true})
     .exec((err,result)=>{
         if (err) {
             res.status(500).send({err:err.message})
@@ -77,8 +93,15 @@ function getForoById(req,res) {
 }
 
 //pendiente
-function getMiForo(req, res){
-
+function getMisForos(req, res){
+    Foro.find({idUsuario:req.user._id}).sort({fecha:1})
+    .exec((err,result)=>{
+        if (err) {
+            res.status(500).send({err:err.message})
+        } else {
+            res.status(200).send({misforos:resultado})            
+        }
+    })
 }
 
 module.exports = {
@@ -87,5 +110,5 @@ module.exports = {
     actualizaForo,
     EliminarForo,
     getForoById,
-    getMiForo
+    getMisForos
 }
