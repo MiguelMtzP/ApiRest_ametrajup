@@ -36,5 +36,6 @@ app.use("/galerias",galeriaRouter)
 app.use("/foros",foroRouter)
 app.use("/albums",albumRouter)
 app.use("/visitas",visitaRouter)
+app.use("/comentarios",comentarioRouter)
 
 module.exports = app;

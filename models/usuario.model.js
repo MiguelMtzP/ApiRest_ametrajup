@@ -15,6 +15,9 @@ var usrSchema = Schema ({
     contrasenia: String,
     empresa: String,
     sector: String,
+    pais: String,
+    ciudad: String,
+    estado: String,
     isAdmin: {type:Boolean,default:false},
     fotoPerfil: String
 });

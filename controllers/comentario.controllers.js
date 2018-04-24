@@ -9,7 +9,7 @@ function getComentarios(peticion,respuesta) {
         if (err) {
             respuesta.status(500).send({"err":err})
         } else {
-            respuesta.status(200).send({comentarios:resultado})            
+            respuesta.status(200).send({comentarios:resultado})
         }
     })
 }
@@ -18,19 +18,20 @@ function crearComentario(req,res) {
     let params = req.body
     let newComentario = new Comentario()
     newComentario.mensaje = params.mensaje
-    newComentario.idForo = req.user._id
+    newComentario.idForo = params.idForo
     if(params.idComentarioPadre){
-        newComentario = params.idComentarioPadre
+        newComentario.idComentarioPadre = params.idComentarioPadre
     }
     newComentario.idUsuario = req.user._id
     newComentario.save((err,result)=>{
         if (err) {
-            respuesta.status(500).send({"err":err})
+            res.status(500).send({"err":err})
         } else {
-            respuesta.status(200).send({comentarioCreado:result})            
+            res.status(200).send({comentarioCreado:result})
         }
     })
 }
+
 
 function actualizaComentario(req,res) {
     let idComentario = req.params.idComentario
@@ -45,7 +46,7 @@ function actualizaComentario(req,res) {
         if (err) {
             res.status(500).send({err:err.message})
         } else {
-            res.status(200).send({comentarioActualizado:result})            
+            res.status(200).send({comentarioActualizado:result})
         }
     })
 }
@@ -59,7 +60,7 @@ function EliminarComentario(req,res) {
         } else if(!result){
             res.status(500).send({err:"Comentario no encontrado"})
         }else{
-            res.status(200).send({exito:"Comentario eliminado con exito"})            
+            res.status(200).send({exito:"Comentario eliminado con exito"})
         }
     })
 }
@@ -71,7 +72,7 @@ function getRespuestasById(req,res) {
         if (err) {
             res.status(500).send({err:err.message})
         } else {
-            res.status(200).send({respuesta:resultado})            
+            res.status(200).send({respuesta:resultado})
         }
     })
 }

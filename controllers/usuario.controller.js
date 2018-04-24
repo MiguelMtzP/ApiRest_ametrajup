@@ -14,14 +14,17 @@ function registro(req,res) {
         user.genero = params.genero
         user.ocupacion = params.ocupacion
         user.telefono = params.telefono
-        
+
+        user.ciudad = params.ciudad
+        user.estado = params.estado
+        user.pais = params.pais
         user.empresa = params.empresa
         user.sector = params.sector
         user.contrasenia = params.contrasenia
         if (params.isAdmin){
             user.isAdmin = params.isAdmin
         }
-        
+
         console.log(req.file)
         let fotoPerfil =config.urlServer + rutaMultimedia + req.file.filename
 
@@ -54,10 +57,10 @@ function login(req,res) {
     .exec((err,usr)=>{
         if (err) {
             res.status(500).send({"err":err.message})
-            
+
         } else if (!usr){
             res.status(403).send({"err":"Usuario o contraseña no validos"})
-            
+
         }else{
             var payload = {"id":usr._id};
             var token = jwt.sign(payload, config.jwtOptions.secretOrKey);
