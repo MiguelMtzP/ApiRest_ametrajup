@@ -13,7 +13,7 @@ var transporter = nodemailer.createTransport({
 var sendContactEmail=(req,res,next)=>{
 
     try {
-      var logoAmetrajup = "http://www.artisticquiltdesign.com/wp-content/uploads/logos-portfolio-project-logos.png"
+      var logoAmetrajup = "http://167.99.235.43:3000/visitas/lema"
       var nombreCompleto = req.body.nombre
       var mailCliente = {
         from:"ame130813@hotmail.com",
