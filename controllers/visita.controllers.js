@@ -1,13 +1,13 @@
 "use strict"
 const Visita = require("../models/visita.model")
-
+const path = require ("path")
 function getVisitas(peticion,respuesta) {
     Visita.find().sort({fecha:1})
     .exec((err,result)=>{
         if (err) {
             respuesta.status(500).send({"err":err})
         } else {
-            respuesta.status(200).send({visitas:result})            
+            respuesta.status(200).send({visitas:result})
         }
     })
 }
@@ -16,7 +16,7 @@ function crearVisita(req,res) {
     let estado = req.body.estado
     let ip = req.body.ip
     let now = new Date()
-    now.setMinutes(now.getMinutes()-30) 
+    now.setMinutes(now.getMinutes()-30)
     Visita.findOne({ip:ip,fecha:{$gt:now}})
     .exec((err,result)=>{
         if (err) {
@@ -25,9 +25,9 @@ function crearVisita(req,res) {
             Visita.findByIdAndUpdate(result._id,{$set:{fecha: new Date()}},{new:true})
             .exec((err,result)=>{
                 if (err) {
-                    res.status(500).send({err:err.message})   
+                    res.status(500).send({err:err.message})
                 } else {
-                    res.status(200).send({visitaAct:result})   
+                    res.status(200).send({visitaAct:result})
                 }
             })
         }else{
@@ -36,17 +36,26 @@ function crearVisita(req,res) {
             newVisita.estado = estado
             newVisita.save((err,saved)=>{
                 if (err) {
-                    res.status(500).send({err:err.message})   
+                    res.status(500).send({err:err.message})
                 } else {
-                    res.status(200).send({visitaGuardada:saved})   
+                    res.status(200).send({visitaGuardada:saved})
                 }
             })
         }
     })
 }
 
+function getLogo(req,res){
+  res.sendFile(path.resolve("./logo.jpeg"))
+}
+function getLema(req,res){
+  res.sendFile(path.resolve("./lema.jpeg"))
+
+}
 
 module.exports = {
     getVisitas,
-    crearVisita
+    crearVisita,
+    getLogo,
+    getLema
 }
